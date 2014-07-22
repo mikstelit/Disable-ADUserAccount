@@ -53,17 +53,13 @@ function Add-CurrentAccountInfoToLog($user)
 
 function Remove-Attributes($user)
 {
+    foreach ($attribute in $attributes)
+    {
+        $user.$attribute = $null
+    }
     try
     {
-        Set-ADuser $user -OfficePhone $null -EmailAddress $null `
-                            -StreetAddress $null -City $null `
-                            -State $null -PostalCode $null `
-                            -Country $null -ScriptPath $null `
-                            -HomeDrive $null -HomeDirectory $null `
-                            -MobilePhone $null -Department $null `
-                            -Title $null -Company $null `
-                            -Manager $null -Office $null `
-                            -ErrorAction Stop
+        Set-ADuser -Instance -ErrorAction Stop
         Add-Content -Path $log -Value "SUCCESS: Removed attributes from user account."
     }
     catch
@@ -135,8 +131,8 @@ function Set-LogEntry($errorMessage, $errorException)
 }
 
 
-$attributes = ( "OfficePhone", "EmailAddress", "StreetAddress", "City", `
-                "State", "PostalCode", "Country", "ScriptPath", "HomeDrive", `
+$attributes = ( "OfficePhone", "otherPhone", "EmailAddress", "StreetAddress", `
+                "City", "State", "PostalCode", "Country", "ScriptPath", "HomeDrive", `
                 "HomeDirectory", "MobilePhone", "Department", "Title", `
                 "Company", "Manager", "Office" )
 
