@@ -131,12 +131,13 @@ function Set-LogEntry($errorMessage, $errorException)
 }
 
 
-$attributes = ( "OfficePhone", "otherPhone", "EmailAddress", "StreetAddress", `
+$attributes = ( "OfficePhone", "otherTelephone", "EmailAddress", "StreetAddress", `
                 "City", "State", "PostalCode", "Country", "ScriptPath", "HomeDrive", `
                 "HomeDirectory", "MobilePhone", "Department", "Title", `
                 "Company", "Manager", "Office" )
 
 
+Import-Module ActiveDirectory
 $ADuser = Get-Useraccount
 $log = ".\" + $ADuser.DisplayName + ".log"
 Add-CurrentAccountInfoToLog $ADuser
