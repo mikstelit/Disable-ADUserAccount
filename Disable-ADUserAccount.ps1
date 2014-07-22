@@ -59,7 +59,7 @@ function Remove-Attributes($user)
     }
     try
     {
-        Set-ADuser -Instance -ErrorAction Stop
+        Set-ADuser -Instance $user -ErrorAction Stop
         Add-Content -Path $log -Value "SUCCESS: Removed attributes from user account."
     }
     catch
